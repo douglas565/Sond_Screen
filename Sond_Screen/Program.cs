@@ -1,6 +1,11 @@
 ﻿// Screen Sound
 string mensagemDeBoasVindas = "Boas Vindas ao Screen Sound";
-List<string> listaDasBandas = new List<string> {"AC/DC","U2","Calypso"};
+//List<string> listaDasBandas = new List<string> {"AC/DC","U2","Calypso"};
+
+Dictionary<string, List<float>> bandasRegistradas = new Dictionary<string, List<float>>();
+bandasRegistradas.Add("Linking Park", new List<float> { 10, 8, 6 });
+bandasRegistradas.Add("The Beatles", new List<float>());
+
 
 void ExibirLogo()
 {
@@ -36,7 +41,7 @@ void ExibirOpcoesDoMenu()
             break;
         case 2: MostrarBandasRegistradas();
             break;
-        case 3: Console.WriteLine("Você escolheu a opção: " + opcaoEscolhidaNumerica);
+        case 3: AvaliarUmaBanda();
             break;
         case 4: Console.WriteLine("Você escolheu a opção: " + opcaoEscolhidaNumerica);
             break;
@@ -54,9 +59,9 @@ void RegistrarBanda()
     ExibirTituloDaOpcao("Registro das bandas");
     Console.Write("Digite o nome da banda que deseja registrar: ");
     string nomeDaBanda = Console.ReadLine()!;
-    listaDasBandas.Add(nomeDaBanda);
+    bandasRegistradas.Add(nomeDaBanda, new List<float>());
     Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
-    Thread.Sleep(2000);
+    Thread.Sleep(5000);
     Console.Clear();
     ExibirOpcoesDoMenu();
 }
@@ -64,14 +69,10 @@ void RegistrarBanda()
 void MostrarBandasRegistradas()
 {
     Console.Clear();
+
     ExibirTituloDaOpcao("Exibindo todas as bandas registradas");
 
-    //for (int i = 0; i < listaDasBandas.Count; i++)
-   // {
-    //    Console.WriteLine($"Banda: {listaDasBandas[i]}");
-   // }
-
-    foreach(string banda in listaDasBandas)
+    foreach(string banda in bandasRegistradas.Keys)
     {
         Console.WriteLine($"Banda: {banda}");
     }
@@ -92,4 +93,36 @@ void ExibirTituloDaOpcao(string titulo)
     Console.WriteLine(asteriscos + "\n");
 }
 
-ExibirOpcoesDoMenu();
+void AvaliarUmaBanda()
+{
+    //digite qual banda deseja avaliar
+    //se a banda existir no dicionario >> atribuir uma nota
+    // senão, volta ao menu principal 
+
+    Console.Clear();
+    ExibirTituloDaOpcao("Avaliar Banda");
+
+    Console.Write("Digite o nome da banda que deseja avaliar: ");
+    string nomeDaBanda = Console.ReadLine()!;
+
+    if (bandasRegistradas.ContainsKey(nomeDaBanda))
+    {
+        Console.Write($"Qual a nota da {nomeDaBanda} merece?: ");
+        float nota = float.Parse(Console.ReadLine()!);
+        bandasRegistradas[nomeDaBanda].Add(nota);
+        Console.WriteLine($"\nA nota {nota} foi registrada com sucesso {nomeDaBanda} ");
+        Thread.Sleep(2000);
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    }
+    else
+    {
+        Console.WriteLine($"\n{nomeDaBanda} não foi encontrada!");
+        Console.WriteLine("Digite uma tecla para voltar ao menu principal");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirOpcoesDoMenu();
+    }
+}
+
+    ExibirOpcoesDoMenu();
