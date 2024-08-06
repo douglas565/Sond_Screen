@@ -3,7 +3,7 @@ string mensagemDeBoasVindas = "Boas Vindas ao Screen Sound";
 //List<string> listaDasBandas = new List<string> {"AC/DC","U2","Calypso"};
 
 Dictionary<string, List<float>> bandasRegistradas = new Dictionary<string, List<float>>();
-bandasRegistradas.Add("Linkin Park", new List<float> { 10, 8, 6 });
+bandasRegistradas.Add("Linking Park", new List<float> { 10, 8, 6 });
 bandasRegistradas.Add("The Beatles", new List<float>());
 
 
@@ -27,7 +27,7 @@ void ExibirOpcoesDoMenu()
     Console.WriteLine("\nDigite 1 para registrar uma banda");
     Console.WriteLine("Digite 2 para mostrar todas as bandas");
     Console.WriteLine("Digite 3 para avaliar uma bandas");
-    Console.WriteLine("Digite 4 para exibir a média de uma banda");
+    Console.WriteLine("Digite 4 parapara exibir a média de uma banda");
     Console.WriteLine("Digite -1 para sair");
 
     Console.Write("\n Digite a sua opção: ");
@@ -43,7 +43,7 @@ void ExibirOpcoesDoMenu()
             break;
         case 3: AvaliarUmaBanda();
             break;
-        case 4: ExibirMedia();
+        case 4: Console.WriteLine("Você escolheu a opção: " + opcaoEscolhidaNumerica);
             break;
         case -1: Console.WriteLine("Adeus, espero te ver outra vez...");
             break;
@@ -125,35 +125,4 @@ void AvaliarUmaBanda()
     }
 }
 
-
-void ExibirMedia()
-{
-    Console.Clear();
-    ExibirTituloDaOpcao("Exibir a Média da Banda");
-
-    Console.Write("Digite o nome da banda que deseja exibir a média: ");
-    string nomeDaBanda = Console.ReadLine()!;
-    if (bandasRegistradas.ContainsKey(nomeDaBanda))
-    {
-        List<float> notasDaBanda = bandasRegistradas[nomeDaBanda];
-        Console.WriteLine($"\nA Média da banda {nomeDaBanda} é {notasDaBanda.Average()}.");
-        Console.WriteLine("Digite uma tecla para voltar ao menu principal!");
-        Console.ReadKey();
-        Console.Clear();
-        ExibirOpcoesDoMenu();
-         
-    }
-    else
-    {
-        Console.WriteLine($"\n{nomeDaBanda} não foi encontrada!");
-        Console.WriteLine("Digite uma tecla para voltar ao menu principal");
-        Console.ReadKey();
-        Console.Clear();
-        ExibirOpcoesDoMenu();
-    }
-}
-
-
-ExibirOpcoesDoMenu();
-
-//Coment
+    ExibirOpcoesDoMenu();
