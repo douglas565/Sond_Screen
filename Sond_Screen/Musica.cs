@@ -8,7 +8,17 @@ class Musica
     public string nome;
     public string artista;
     public int duracao;
-    public bool disponivel;
+    private bool disponivel;
+
+    public void EscreveDisponivel(bool value)
+    {
+        disponivel = value;
+    }
+
+    public bool LeDisponivel()
+    {
+        return disponivel;
+    }
 
     public void ExibirFichaTecnica()
     {
